@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nur Afiqah Website</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===== Global Styles ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #fff0f5; /* soft pink background */
+      color: #333;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #d16ba5;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffb6c1;
+      padding: 10px 20px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li a {
+      color: white;
+      font-weight: bold;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      position: relative;
+      background-image: url('https://i.pinimg.com/736x/70/66/05/706605e9558e4c7e6a6d7b166bf95420.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 150px 20px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 182, 193, 0.5);
+      z-index: 0;
+    }
+    .hero .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+    .hero .btn {
+      display: inline-block;
+      background-color: #fff;
+      color: #d16ba5;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .hero .btn:hover {
+      background-color: #ffe4ec;
+    }
+
+    /* ===== About Section ===== */
+    .about {
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .profile-pic {
+      width: 200px;
+      border-radius: 50%;
+      border: 3px solid #ffb6c1;
+      margin: 20px 0;
+    }
+    .about-content {
+      max-width: 900px;
+    }
+
+    /* ===== Skills Section ===== */
+    .skills {
+      padding: 50px 20px;
+    }
+    .skill-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+    }
+    .skill-list li {
+      position: relative;
+      background-color: #ffb6c1;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .skill-list li:hover {
+      transform: scale(1.1);
+    }
+    .skill-list li::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      color: #d16ba5;
+      padding: 8px 12px;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .skill-list li:hover::after {
+      opacity: 1;
+    }
+
+    /* ===== Projects Section ===== */
+    .projects {
+      padding: 50px 20px;
+    }
+    .slider-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .card {
+      flex: 0 0 300px;
+      margin: 10px;
+      border: 1px solid #ffc0cb;
+      border-radius: 8px;
+      background-color: #fff;
+      padding: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      display: block;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255,182,193,0.4);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(255,182,193,0.5);
+      color: #333;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .prev { left: 0; }
+    .next { right: 0; }
+
+    /* ===== Contact Section ===== */
+    .contact {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .contact-icons {
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .contact-icons a {
+      color: #d16ba5;
+      transition: color 0.3s;
+    }
+    .contact-icons a:hover {
+      color: #ff69b4;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffb6c1;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Afiqah Website</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Hi, Welcome to my website!</h1>
+      <p>“Organizing Information, Empowering Knowledge”.</p>
+      <a href="#projects" class="btn">View My Work</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="about-content">
+      <p>Hello, my name is <b>Nur Afiqah binti Yusof</b>, and I am currently in my final year of the Diploma in Information Management program at Universiti Teknologi MARA (UiTM). Throughout my studies, I have developed a strong foundation in information organization, data management, and digital archiving, as well as a keen interest in how technology can be used to improve information accessibility and efficiency.
+      <br><br>
+      I am passionate about learning and constantly seeking opportunities to enhance my skills and knowledge in the field of information management. I enjoy exploring new systems, software, and strategies that help in organizing and preserving information more effectively. My goal is to apply what I have learned to contribute to organizations that value innovation, accuracy, and reliability in handling information.
+      <br><br>
+      Beyond academics, I enjoy engaging in creative and productive activities that inspire me to grow both personally and professionally. I believe that success comes from dedication, continuous learning, and a positive attitude.</p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <ul class="skill-list">
+      <li data-tooltip="I can explain ideas clearly in writing and speaking.">Communication Skills</li>
+      <li data-tooltip="I work well with others to achieve goals.">Teamwork and Collaboration</li>
+      <li data-tooltip="I can organize and handle information effectively.">Information Management</li>
+      <li data-tooltip="I can present ideas confidently and clearly.">Presentation skills</li>
+      <li data-tooltip="I can lead and guide a team to complete tasks.">Leadership</li>
+      <li data-tooltip="I can prioritize tasks and meet deadlines.">Time Management</li>
+    </ul>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <h2>Other Information About Me</h2>
+    <div class="slider-container">
+      <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+      <div class="slider" id="slider">
+        <a href="education.html" class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Education">
+          <h3>Education</h3>
+          <p>Background of education.</p>
+        </a>
+        <a href="training.html" class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Training">
+          <h3>Industrial Training</h3>
+          <p>Experience in managing organizational records and archives.</p>
+        </a>
+        <a href="languages.html" class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Languages">
+          <h3>Language & Communication</h3>
+          <p>Fluent in English and Malay, skilled in presentations.</p>
+        </a>
+        <a href="projects.html" class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Projects">
+          <h3>Hobbies & Interests</h3>
+          <p>Developed web-based projects for coursework and portfolios.</p>
+        </a>
+        <a href="achievements.html" class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Achievements">
+          <h3>Achievements</h3>
+          <p>Recognized for academic excellence and teamwork contributions.</p>
+        </a>
+      </div>
+      <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>Reach me via:</p>
+    <div class="contact-icons">
+      <a href="mailto:aaafiqahhh@gmail.com" title="Email Me">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://www.instagram.com/efiyqaa._" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="tel:+601169282749" title="Call Me">
+        <i class="fas fa-phone"></i>
+      </a>
+      <a href="https://wa.me/601169282749" target="_blank" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Nur Afiqah. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Slider functionality
+    let slider = document.getElementById('slider');
+    let offset = 0;
+
+    function moveSlide(direction) {
+      const cardWidth = 320;
+      const totalCards = slider.children.length;
+      const containerWidth = 1000;
+      const maxOffset = (cardWidth * totalCards) - containerWidth;
+
+      offset += direction * cardWidth;
+      if(offset < 0) offset = 0;
+      if(offset > maxOffset) offset = maxOffset;
+
+      slider.style.transform = `translateX(-${offset}px)`;
+    }
+  </script>
+</body>
+</html>
